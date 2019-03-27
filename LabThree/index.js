@@ -25,7 +25,7 @@ const resolvers = {
       return context.prisma.customer({
         where:{customer: args.customerId}
       }).customerHistories()
-    }
+    } 
   },
   Mutation: {
     //Updates a customer and makes a new one
