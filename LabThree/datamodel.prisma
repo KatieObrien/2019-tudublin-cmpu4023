@@ -1,0 +1,61 @@
+type Query {
+  getCustomers: [Customer!]!
+  getOrders: [Order!]!
+  getProducts: [Products!]!
+  his(customertHistoryId: ID!): CustomerHistory
+  getHistory: [hisID: ID!]!
+  ordersByCustomer(customerId: ID!): [CustomerHistory!]!
+}
+
+type Mutation {
+  createCustomer(firstName: String!,lastName: String!, email: String!, username: String!, password: String!): Customer
+  createProducts(prodId: ID!,title: String!,category: Int!,actor: String!,price: Int!,special: Int!,commonProdId: Int!): Products
+  createOrder(orderId: ID!,orderItem: String!,orderDate: String!,netamount: Int!,tax: Int!,totalAmount: Int!,customerId: ID!): Order
+  customerOrderHistory(customerId: custID!, orderId: ordID!, prodId: proID!): CustomerHistory
+}
+
+type Customer {
+  id: ID! @unique
+  firstName: String!
+  lastName: String!
+  address1: String!
+  address2: String!
+  city: String!
+  zip: Int!
+  country: String!
+  email: String!
+  phone: String!
+  cardType: Int!
+  card: String!
+  cardExpiration: String!
+  username: String!
+  password: String!
+  age: Int!
+  income: Int!
+  gender: Int!
+}
+type Order {
+  orderId: ID! @unique
+  orderItem: String!
+  orderDate: String!
+  netamount: Int!
+  tax: Int!
+  totalAmount: Int!
+  customer: Customer
+}
+type CustomerHistory {
+  id: ID! @unique
+  customer: Customer
+  orders: [Order!]!
+  products: [Products!]!
+}
+
+type Products {
+  prodId: ID! @unique
+  title: String!
+  category: Int!
+  actor: String!
+  price: Int!
+  special: Int!
+  commonProdId: Int!
+}
